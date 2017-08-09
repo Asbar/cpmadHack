@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>item</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding="">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+    <div style="background-color:white;height:25%">
+      <div>
+        <img style="width:50%;margin:0 auto;display: block" [src]="foodImage" />
+      </div>
+    </div>
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        {{foodName}}
+        <p style="text-align:left">Powerful Kirexrosture Education institute</p>
+      </ion-card-title>
+      <div>
+        <ion-list>
+          <ion-item>
+            <ion-label>Your Country</ion-label>
+            <ion-select (ionChange)="checkSize()" [(ngModel)]="country">
+              <ion-option value="SriLanka">SriLanka</ion-option>
+              <ion-option value="India">India</ion-option>
+              <ion-option value="Canada">Canada</ion-option>
+              <ion-option value="England">England</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Learning Ways</ion-label>
+            <ion-select (ionChange)="checkColor()" [(ngModel)]="media">
+              <ion-option value="Video">Video</ion-option>
+              <ion-option value="Chat">Chat</ion-option>
+              <ion-option value="Calling">Calling</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Number of Hours</ion-label>
+            <ion-select (ionChange)="getPriceByQuan($event)" [(ngModel)]="quantity">
+              <ion-option value="1">one</ion-option>
+              <ion-option value="2">two</ion-option>
+              <ion-option value="3">three</ion-option>
+              <ion-option value="4">four</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Price</ion-label>
+            <ion-label style="text-align:right;">
+              <span style="text-decoration: line-through;">${{TempOldPrice}}</span>
+              <span style="font-size:20px;color:#32db64;font-weight:bold" >${{TempNewPrice}}</span></ion-label>
+          </ion-item>
+
+        </ion-list>
+      </div>
+      <div>
+        <button ion-button full [disabled]="isDisable" (click)="addToCart()">Add this course to cart</button>
+      </div>
+
+      <ion-item>
+				<ion-label stacked color="primary">Add a feedback</ion-label>
+				<ion-input [(ngModel)]="feedBack" type="text">
+				</ion-input>
+			</ion-item>
+      <ion-col>
+				<button ion-button (click)="AddFeedBack()" color="light" block>Add</button>
+			</ion-col>
+
+      <!-- feedback list-->
+
+        <ion-list>
+        <button ion-item  *ngFor="let item of feedBackList">
+          <p>{{item.feedBack}}</p>        
+        </button>
+
+  </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

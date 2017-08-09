@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-navbar no-border-bottom>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-segment [(ngModel)]="segment">
+      <ion-segment-button (click)="showMainList()" value="Main List">
+        Available Groups
+      </ion-segment-button>
+      <ion-segment-button (click)="showOrderList()" value="favorites">
+        Course Lists
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-buttons end>
+      <button ion-button (click)="logout()" value="LogOut" ios="ios-options-outline" md="md-options">
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary" [(ngModel)]="queryText" (ionInput)="setFilteredItems()" placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+<!--- Main List Items -->
+  <ion-list *ngIf="orderList==false">
+
+    <ion-item-group *ngFor="let item of MainListData">
+
+      <ion-item-divider sticky>
+        <ion-label>
+          {{item.time}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding>
+
+        <button ion-item (click)="goToMainListDetail(item._id)">
+          <h3>{{item.name}}</h3>
+          <p>
+            {{item.timeStart}} &mdash;
+            {{item.timeEnd}}:
+            {{item.location}}
+          </p>
+        </button>
+
+        <ion-item-options>
+          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+            Favorite
+          </button>
+          <button ion-button color="danger" (click)="deleteReview(item.time)" *ngIf="segment === 'favorites'">
+            Remove
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </ion-item-group>
+
+  </ion-list>
+
+<!--- Order List Items -->
+
+  <ion-list *ngIf="orderList==true">
+
+    <ion-item-group *ngFor="let item of MainOrderListData">
+      <ion-item-divider sticky>
+        <ion-label>
+          {{item.header}}
+        </ion-label>
+      </ion-item-divider>
+
+      <ion-item-sliding>
+
+        <button ion-item (click)="goToOrderListDetail(item._id)">
+          <ion-avatar item-left>
+          <img [src]="item.productImg">
+        </ion-avatar>
+          <h3 style="font-weight:bold"> {{ item.Name }}‎ </h3>
+          <p>
+            Course Type:{{item.quantity}} &mdash;
+            Price:
+            <span style="text-decoration: line-through;color:red">${{item.oldPrice}}</span>
+            <span style="font-size:20px;color:#32db64;font-weight:bold">${{item.newPrice}}</span>
+          </p>
+
+          <p>
+            Teaching Date : {{item.date}}
+          </p>
+          <p>
+            Teaching Time : {{item.time}}
+          </p>
+        </button>
+
+        <ion-item-options>
+          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'all'">
+            Favorite
+          </button>
+          <button ion-button color="favorite" (click)="addFavorite(slidingItem, session)" *ngIf="segment === 'favorites'">
+            Good
+          </button>
+          <button ion-button color="danger" (click)="deleteReview(time)" *ngIf="segment === 'favorites'">
+            Bad
+          </button>
+        </ion-item-options>
+
+      </ion-item-sliding>
+
+    </ion-item-group>
+
+  </ion-list>
+
+  <ion-fab bottom right #fab *ngIf="orderList==false">
+    <button ion-fab><ion-icon name="share"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab color="vimeo" (click)="openSocial('Vimeo', fab)"><ion-icon name="logo-vimeo"></ion-icon></button>
+      <button ion-fab color="google" (click)="openSocial('Google+', fab)"><ion-icon name="logo-googleplus"></ion-icon></button>
+      <button ion-fab color="twitter" (click)="openSocial('Twitter', fab)"><ion-icon name="logo-twitter"></ion-icon></button>
+      <button ion-fab color="facebook" (click)="openSocial('Facebook', fab)"><ion-icon name="logo-facebook"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+   <ion-fab right bottom *ngIf="orderList==true">
+    <button ion-fab color="primary" (click)="viewCart()"><ion-icon name="cart"></ion-icon></button>
+  </ion-fab>
+
+
+</ion-content>

@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Add Order Item Forms
+    </ion-title>
+     <ion-buttons end>
+      <button ion-button (click)="save()"><ion-icon name="save"></ion-icon>Save</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <p>
+        Add your own Course details and student will  select your Course.Then they will pay.
+      </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header style="background-color:#428bca;color:white">
+      Course Details
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col width-50>
+          <ion-item>
+            <ion-label floating>Course Name</ion-label>
+            <ion-input type="text" [(ngModel)]="food"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col width-50>
+         <ion-item>
+				<ion-label stacked color="primary">User Category</ion-label>
+				<ion-select [(ngModel)]="courseType">
+              <ion-option value="Programming">Programming</ion-option>
+              <ion-option value="English">English</ion-option>
+            </ion-select>
+			</ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-item>
+        <ion-label floating>Course Price</ion-label>
+        <ion-input type="text" [(ngModel)]="price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Discount for Course</ion-label>
+        <ion-input type="number" [(ngModel)]="discount"></ion-input>
+      </ion-item>
+      
+      <!--<img [src]="base64Image" *ngIf="base64Image" />-->
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header style="background-color:#428bca;color:white">
+      Date and time Details
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col width-50>
+          <ion-item>
+            <ion-label>Select the date to teach</ion-label>
+            <ion-input type="date" [(ngModel)]="date"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col width-50>
+          <ion-item>
+            <ion-label>Select the time to teach</ion-label>
+            <ion-input type="time" [(ngModel)]="time"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+     
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

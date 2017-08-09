@@ -1,0 +1,56 @@
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+		<ion-title>Signup</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="login-page">
+
+	<div class="logo">
+		<img style="width:50%" src="assets/img/signup.png" alt="Ionic Logo">
+	</div>
+
+	<div >
+		<ion-list no-lines>
+			<ion-item>
+				<ion-label stacked color="primary">User Category</ion-label>
+				<ion-select [(ngModel)]="userCat">
+              <ion-option value="Student">Student</ion-option>
+              <ion-option value="Teacher">Teacher</ion-option>
+            </ion-select>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked color="primary">Username</ion-label>
+				<ion-input [(ngModel)]="username"  type="text">
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="Ivalidusername==false" color="danger" padding-left>
+				Username is required
+			</p>
+
+			<ion-item>
+				<ion-label stacked color="primary">Password</ion-label>
+				<ion-input [(ngModel)]="password"  type="password" >
+				</ion-input>
+			</ion-item>
+			<p ion-text [hidden]="Ivalidpassword==false" color="danger" padding-left>
+				Password is required
+			</p>
+		</ion-list>
+
+		<div padding>
+			<button ion-button (click)="onSignup()" type="submit" block>Create</button>
+			<button ion-button (click)="goLogin()" type="submit" block>Have a account? Login</button>
+		</div>
+		<p ion-text [hidden]="isExistingUser==false" color="danger" >
+				Already have a account.Please try new Username
+		</p>
+		<p ion-text [hidden]="isCreateAccount==false" style="color:#5cb85c;text-align:center;font-weight:bold" >
+				Successfully Created a Account.
+		</p>
+	</div>
+
+</ion-content>
